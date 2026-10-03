@@ -1,28 +1,28 @@
 """
 =============================================================================
- Surviving Zombie  —  GROUP-12
+ Surviving Zombie
  A 3D top-down action shooter built with legacy OpenGL.
  
  Controls:
-   WASD        – Move player (world-axis aligned)
-   Mouse Move  – Aim (player faces cursor)
-   Left Click  – Shoot toward cursor
-   Right Click – Toggle camera mode (3rd-person / 1st-person)
-   Arrow Keys  – Orbit / raise-lower camera
-   1/2/3       – Buy items in Shop (between waves)
-   C           – Toggle cheat mode (auto-aim turret)
-   V           – Toggle cheat vision (1st-person follows turret)
-   R           – Restart game
+   WASD        - Move player (world-axis aligned)
+   Mouse Move  - Aim (player faces cursor)
+   Left Click  - Shoot toward cursor
+   Right Click - Toggle camera mode (3rd-person / 1st-person)
+   Arrow Keys  - Orbit / raise-lower camera
+   1/2/3       - Buy items in Shop (between waves)
+   C           - Toggle cheat mode (auto-aim turret)
+   V           - Toggle cheat vision (1st-person follows turret)
+   R           - Restart game
    
  Weapons (unlocked via Shop):
-   Pistol       – Default. Single slow shot.
-   Machine Gun  – Rapid fire, single bullet.
-   Shotgun      – 3-bullet spread per shot.
+   Pistol       - Default. Single slow shot.
+   Machine Gun  - Rapid fire, single bullet.
+   Shotgun      - 3-bullet spread per shot.
 
  Waves:
-   Level 1 – Slow regular zombies (green-ish)
-   Level 2 – Faster mutant zombies  (purple)
-   Level 3 – Boss zombie + minions   (boss = huge red)
+   Level 1 - Slow regular zombies (green-ish)
+   Level 2 - Faster mutant zombies  (purple)
+   Level 3 - Boss zombie + minions   (boss = huge red)
 =============================================================================
 """
 
@@ -86,7 +86,7 @@ wave_zombie_count    = [8, 12, 10]   # Zombies to kill per wave
 wave_zombies_killed  = 0
 boss_alive           = False
 
-# Keys currently held down — polled each idle frame for smooth movement
+# Keys currently held down - polled each idle frame for smooth movement
 keys_held = set()
 
 # Timing
@@ -433,11 +433,11 @@ def draw_player():
     glPushMatrix()
     glTranslatef(0, 0, 50)
     glRotatef(-90, 1, 0, 0)
-    if current_weapon == 0:       # Pistol — thin short barrel
+    if current_weapon == 0:       # Pistol - thin short barrel
         gluCylinder(gluNewQuadric(), 5, 2, 50, 10, 10)
-    elif current_weapon == 1:     # Machine Gun — thicker longer barrel
+    elif current_weapon == 1:     # Machine Gun - thicker longer barrel
         gluCylinder(gluNewQuadric(), 7, 4, 75, 10, 10)
-    elif current_weapon == 2:     # Shotgun — fat short barrel
+    elif current_weapon == 2:     # Shotgun - fat short barrel
         gluCylinder(gluNewQuadric(), 10, 8, 55, 10, 10)
     glPopMatrix()
 
@@ -756,7 +756,7 @@ def draw_shop():
     glPushMatrix()
     glLoadIdentity()
 
-    # Background panel — clearly visible dark blue-grey
+    # Background panel - clearly visible dark blue-grey
     glColor3f(0.08, 0.10, 0.18)
     glBegin(GL_QUADS)
     glVertex2f(0, 0)
@@ -789,7 +789,7 @@ def draw_shop():
     glMatrixMode(GL_PROJECTION)
     glPopMatrix()
     glMatrixMode(GL_MODELVIEW)
-    # depth test remains OFF — draw_colored_text will manage its own toggle
+    # depth test remains OFF - draw_colored_text will manage its own toggle
 
     # Title
     draw_colored_text(340, 660, "=== ITEM SHOP ===", 1.0, 0.85, 0.0, GLUT_BITMAP_HELVETICA_18)
@@ -804,7 +804,7 @@ def draw_shop():
             already_owned = True
         if idx == 2 and weapons_unlocked[2]:
             already_owned = True
-        # Cannon (idx 3) is stackable — never "owned"
+        # Cannon (idx 3) is stackable - never "owned"
 
         if already_owned:
             draw_colored_text(180, iy, f"[{item['key']}]  {item['name']}", 0.5, 0.5, 0.5, GLUT_BITMAP_HELVETICA_18)
@@ -874,7 +874,7 @@ def fire_weapon(win_x, win_y):
         fire_bullet(gun_angle)
     elif current_weapon == 1:  # Machine Gun
         fire_bullet(gun_angle)
-    elif current_weapon == 2:  # Shotgun – 3 bullets in a spread
+    elif current_weapon == 2:  # Shotgun - 3 bullets in a spread
         spread = 12.0
         fire_bullet(gun_angle - spread)
         fire_bullet(gun_angle)
@@ -974,7 +974,7 @@ def keyboardListener(key, x, y):
     if game_over or game_won:
         return
 
-    # WASD movement is handled in idle() via keys_held — no per-key action here
+    # WASD movement is handled in idle() via keys_held - no per-key action here
 
     # ---- Weapon switch (Q/E during gameplay) ----
     if key == b'q' or key == b'Q':
@@ -1244,7 +1244,7 @@ def idle():
                     # Enemy killed
                     score += 1
                     wave_zombies_killed += 1
-                    # Drop cash — store spawn time for 5-second expiry
+                    # Drop cash - store spawn time for 5-second expiry
                     cash_drops.append({
                         'x': e['x'],
                         'y': e['y'],
